@@ -5,6 +5,7 @@ import { IUserData } from '.';
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
   timeout: 60000,
+  headers: { Authorization: 'Bearer ' + 'token' },
 });
 
 export const UserService = {
