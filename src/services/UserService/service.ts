@@ -1,19 +1,15 @@
-import axios from 'axios';
+import { axiosInstance } from '@/lib/http';
 
-import { IUserData } from '.';
+import { UserData } from '.';
 
-const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
-  timeout: 60000,
-  headers: { Authorization: 'Bearer ' + 'token' },
-});
+const pathUrl = '/users';
 
 export const UserService = {
   getAll: async function () {
     try {
       const { data } = await axiosInstance.request({
         method: 'GET',
-        url: `?_limit=10`,
+        url: `${pathUrl}?_limit=10`,
       });
       return data;
     } catch (error) {
@@ -33,7 +29,7 @@ export const UserService = {
       throw error;
     }
   },
-  create: async function (user: IUserData) {
+  create: async function (user: UserData) {
     try {
       const response = await axiosInstance.request({
         method: 'POST',
@@ -46,7 +42,7 @@ export const UserService = {
       throw error;
     }
   },
-  update: async function (userId: number, user: IUserData) {
+  update: async function (userId: number, user: UserData) {
     try {
       const response = await axiosInstance.request({
         method: 'PUT',

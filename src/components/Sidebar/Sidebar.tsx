@@ -1,5 +1,9 @@
-import { Button } from '@chakra-ui/react';
+import { Button, LinkBox, VStack } from '@chakra-ui/react';
 import { Metadata } from 'next';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
+
+import { removeToken } from '@/lib/http';
 
 export const metadata: Metadata = {
   title: 'Sidebar',
@@ -7,11 +11,26 @@ export const metadata: Metadata = {
 };
 
 export default function Sidebar() {
+  const handleLogout = async () => {
+    await signOut({
+      callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/auth/sign-in`,
+      redirect: true,
+    });
+
+    removeToken();
+  };
+
   return (
-    <div>
-      <Button variant={'secondary'} size={'sm'} fontSize={12} width={100}>
-        Test Button
+    <VStack as="nav" spacing={4} align="start" style={{ padding: '1rem' }}>
+      <LinkBox>
+        <Link href={'/'}>Posts</Link>
+      </LinkBox>
+      <LinkBox>
+        <Link href={'/users'}>Users</Link>
+      </LinkBox>
+      <Button variant={'primary'} onClick={handleLogout}>
+        Log out
       </Button>
-    </div>
+    </VStack>
   );
 }

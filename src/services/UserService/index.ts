@@ -1,6 +1,6 @@
 import UserService from './service';
 
-export interface IUserData {
+export interface UserData {
   userId: number;
   name: string;
 }

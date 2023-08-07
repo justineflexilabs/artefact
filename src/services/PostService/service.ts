@@ -1,19 +1,15 @@
-import axios from 'axios';
+import { axiosInstance } from '@/lib/http';
 
-import { IPostData } from '.';
+import { PostData } from '.';
 
-const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_API_URL,
-  timeout: 60000,
-  headers: { Authorization: 'Bearer ' + 'token' },
-});
+const pathUrl = '/posts';
 
 export const PostService = {
   getAll: async function () {
     try {
       const { data } = await axiosInstance.request({
         method: 'GET',
-        url: `?_limit=10`,
+        url: `${pathUrl}?_limit=50`,
       });
       return data;
     } catch (error) {
@@ -25,7 +21,7 @@ export const PostService = {
     try {
       const { data } = await axiosInstance.request({
         method: 'GET',
-        url: `/${postId}`,
+        url: `${pathUrl}/${postId}`,
       });
       return data;
     } catch (error) {
@@ -33,7 +29,7 @@ export const PostService = {
       throw error;
     }
   },
-  create: async function (post: IPostData) {
+  create: async function (post: PostData) {
     try {
       const response = await axiosInstance.request({
         method: 'POST',
@@ -46,7 +42,7 @@ export const PostService = {
       throw error;
     }
   },
-  update: async function (postId: number, post: IPostData) {
+  update: async function (postId: number, post: PostData) {
     try {
       const response = await axiosInstance.request({
         method: 'PUT',

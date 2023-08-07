@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import { IPostData } from '@/services/PostService';
+import { PostData } from '@/services/PostService';
 
-interface IProps {
-  selectedPost: IPostData[];
+interface Props {
+  selectedPost: PostData[];
 }
 
-export default function ArtifactCard({ selectedPost }: IProps) {
+export default function ArtifactCard({ selectedPost }: Props) {
   return (
     <div>
       <Head>

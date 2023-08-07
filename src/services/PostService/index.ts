@@ -1,6 +1,6 @@
 import PostService from './service';
 
-export interface IPostData {
+export interface PostData {
   id: number;
   title: string;
   userId: number;
