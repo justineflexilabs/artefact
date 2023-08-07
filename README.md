@@ -2,14 +2,22 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Installing the packages
+
+```bash
+pnpm install
+```
+
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+pnpm run dev --port=3000
+```
+
+Create .env file:
+
+```bash
+NEXT_PUBLIC_BACKEND_API_URL=https://jsonplaceholder.typicode.com/posts
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
