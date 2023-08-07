@@ -39,7 +39,7 @@
     "id-length": [
       2,
       {
-        "exceptions": ["i", "x"]
+        "exceptions": ["i", "x", "e"]
       }
     ],
     "@typescript-eslint/naming-convention": [
@@ -53,14 +53,6 @@
         "format": ["PascalCase"],
         "types": ["boolean"],
         "prefix": ["is", "should", "has", "can", "did", "will", "was", "show"]
-      },
-      {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^I[A-Z]",
-          "match": true
-        }
       }
     ]
   }

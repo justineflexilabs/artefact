@@ -1,28 +1,38 @@
 import '@/styles/globals.css';
-import { useState } from 'react';
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, ScaleFade } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { SessionProvider } from 'next-auth/react';
 
 import theme from '@/themes';
 
-// const Sidebar = dynamic(() =>
-//   import('@/components/Sidebar').then((res) => res.Sidebar)
-// );
+const Sidebar = dynamic(() =>
+  import('@/components/Sidebar').then((res) => res.Sidebar)
+);
 
-export default function App({ Component, pageProps }: AppProps) {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
-
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
+  const router = useRouter();
+  const showSidebar = router.pathname === '/auth/sign-in' ? false : true;
   return (
     <>
-      <ChakraProvider theme={theme}>
-        {/* {isClicked ? <Sidebar /> : null}
-        <Button onClick={() => setIsClicked((prevState) => !prevState)}>
-          Click me
-        </Button> */}
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <SessionProvider session={session} refetchOnWindowFocus={false}>
+        <ChakraProvider theme={theme}>
+          <Flex>
+            {showSidebar && <Sidebar />}
+
+            <Box flex="1" padding="1rem">
+              <ScaleFade key={router.route} initialScale={0.9} in={true}>
+                <Component {...pageProps} />
+              </ScaleFade>
+            </Box>
+          </Flex>
+        </ChakraProvider>
+      </SessionProvider>
     </>
   );
 }
