@@ -5,14 +5,13 @@ import { getSession } from 'next-auth/react';
 
 import { getAuthHeader } from '@/lib/http';
 
-export const getSessionToken = async (
+export const getSessionAccessToken = async (
   context: GetServerSidePropsContext<ParsedUrlQuery>
 ) => {
   const authHeader = getAuthHeader() as string;
 
   if (!authHeader) {
     const session = await getSession(context);
-    console.log('session', session);
     return session?.user.accessToken as string;
   }
 
