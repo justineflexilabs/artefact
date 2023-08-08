@@ -1,6 +1,6 @@
 import { Button, LinkBox, VStack } from '@chakra-ui/react';
-import { Metadata } from 'next';
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { signOut } from 'next-auth/react';
 
 import { removeToken } from '@/lib/http';
@@ -27,6 +27,9 @@ export default function Sidebar() {
       </LinkBox>
       <LinkBox>
         <Link href={'/users'}>Users</Link>
+      </LinkBox>
+      <LinkBox>
+        <Link href={'/add-installation'}>Add Installation</Link>
       </LinkBox>
       <Button variant={'primary'} onClick={handleLogout}>
         Log out

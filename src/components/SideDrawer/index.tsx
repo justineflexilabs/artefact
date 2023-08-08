@@ -1,1 +1,1 @@
-export { default as ArtifactCard } from '@/components/SideDrawer/ArtifactCard';
+export { default as SideDrawer } from '@/components/SideDrawer/SideDrawer';

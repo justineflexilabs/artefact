@@ -1,4 +1,3 @@
-// components/Button.ts
 import { ComponentStyleConfig } from '@chakra-ui/react';
 
 const baseStyle = {

@@ -1,10 +1,10 @@
 import { Container, Flex, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
+import { Inter } from 'next/font/google';
 
-import styles from '@/pages/Home.module.css';
 import UserService, { UserData } from '@/services/UserService';
+import styles from '@/pages/Home.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

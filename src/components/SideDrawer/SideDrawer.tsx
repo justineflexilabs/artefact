@@ -6,7 +6,7 @@ interface Props {
   selectedPost: PostData[];
 }
 
-export default function ArtifactCard({ selectedPost }: Props) {
+export default function SideDrawer({ selectedPost }: Props) {
   return (
     <div>
       <Head>

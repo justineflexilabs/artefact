@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { Button, Container, Flex, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import dynamic from 'next/dynamic';
-import { Inter } from 'next/font/google';
 import Head from 'next/head';
+import { Inter } from 'next/font/google';
+import dynamic from 'next/dynamic';
 
+import PostService, { PostData } from '@/services/PostService';
+import { getSessionAccessToken } from '@/utils/helpers/getSessionAccessToken';
 import { setAxiosBearerToken } from '@/lib/http';
 import styles from '@/pages/Home.module.css';
-import PostService, { PostData } from '@/services/PostService';
-import { getSessionToken } from '@/utils/getSessionToken';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const ArtifactCard = dynamic(() =>
-  import('@/components/SideDrawer').then((res) => res.ArtifactCard)
+const SideDrawer = dynamic(() =>
+  import('@/components/SideDrawer').then((res) => res.SideDrawer)
 );
 
 interface Props {
@@ -26,7 +26,7 @@ export default function Dashboard({ posts, token: accessToken }: Props) {
   const [selectedPost, setSelectedPost] = useState<PostData[]>([]);
 
   const handleClickPost = async (id: number) => {
-    const data = await PostService.getById(id);
+    const { data } = await PostService.getById(id);
     setSelectedPost(posts.filter((post: PostData) => data.id === post.id));
   };
 
@@ -63,7 +63,7 @@ export default function Dashboard({ posts, token: accessToken }: Props) {
           </Container>
         ))}
         {selectedPost.length > 0 ? (
-          <ArtifactCard selectedPost={selectedPost} />
+          <SideDrawer selectedPost={selectedPost} />
         ) : null}
       </main>
     </>
@@ -72,7 +72,7 @@ export default function Dashboard({ posts, token: accessToken }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //Set axios headers with access token
-  const token = await getSessionToken(context);
+  const token = await getSessionAccessToken(context);
   setAxiosBearerToken(token);
 
   const posts = await PostService.getAll();

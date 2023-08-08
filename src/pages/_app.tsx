@@ -2,9 +2,9 @@ import '@/styles/globals.css';
 
 import { Box, ChakraProvider, Flex, ScaleFade } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { SessionProvider } from 'next-auth/react';
 
 import theme from '@/themes';
 
@@ -25,7 +25,7 @@ export default function App({
           <Flex>
             {showSidebar && <Sidebar />}
 
-            <Box flex="1" padding="1rem">
+            <Box width="full">
               <ScaleFade key={router.route} initialScale={0.9} in={true}>
                 <Component {...pageProps} />
               </ScaleFade>

@@ -1,3 +1,9 @@
+import { Text } from '@chakra-ui/react';
+
 export default function AddInstallation() {
-  return <div>AddInstallation</div>;
+  return (
+    <div>
+      <Text>Add Installation</Text>
+    </div>
+  );
 }
