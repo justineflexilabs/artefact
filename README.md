@@ -17,8 +17,16 @@ pnpm run dev --port=3000
 Create .env file:
 
 ```bash
-NEXT_PUBLIC_BACKEND_API_URL=https://jsonplaceholder.typicode.com/posts
+NEXT_PUBLIC_BACKEND_API_URL=https://jsonplaceholder.typicode.com
+NEXTAUTH_SECRET = 'JPVsVEqEJe0BI5JahGeTnxKBpKb6KZUSmVb/U/zazOs='
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_DOMAIN=http://localhost:3000
 ```
+
+To login, use this credentials:
+
+- Email: john@gmail.com
+- Password: 123
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
