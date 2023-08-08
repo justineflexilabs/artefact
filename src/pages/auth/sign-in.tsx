@@ -17,7 +17,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import { PasswordIcon, UserIcon } from '@public/icons/auth';
-import Sample from '@public/images/1.png';
+import { AuthImageCarousel } from '@/components/Auth';
 
 export default function SignIn() {
   const router = useRouter();
@@ -47,12 +47,8 @@ export default function SignIn() {
       justifyContent="center"
       width="100vw"
     >
-      <Box width="100%" height="100vh">
-        <Image
-          src={Sample}
-          alt="test"
-          style={{ width: '100%', height: '100%' }}
-        />
+      <Box width="45%" height="100vh">
+        <AuthImageCarousel />
       </Box>
       <Flex
         direction="column"
@@ -61,7 +57,7 @@ export default function SignIn() {
         justifyContent="center"
         width={'full'}
       >
-        <Box as="form" onSubmit={handleSubmit} width={'60%'}>
+        <Box as="form" onSubmit={handleSubmit} width={'50%'}>
           <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
             Login Member Area
           </Text>
