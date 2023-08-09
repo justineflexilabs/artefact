@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 import PostService, { PostData } from '@/services/PostService';
 import { getSessionAccessToken } from '@/utils/helpers/getSessionAccessToken';
+import { handleServerError } from '@/utils/helpers/serverErrorHandler';
 import { setAxiosBearerToken } from '@/lib/http';
 import styles from '@/pages/Home.module.css';
 
@@ -20,6 +21,7 @@ const SideDrawer = dynamic(() =>
 interface Props {
   posts: PostData[];
   token: string;
+  errorMessage: string;
 }
 
 export default function Dashboard({ posts, token: accessToken }: Props) {
@@ -75,12 +77,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const token = await getSessionAccessToken(context);
   setAxiosBearerToken(token);
 
-  const posts = await PostService.getAll();
+  try {
+    const posts = await PostService.getAll();
 
-  return {
-    props: {
-      posts,
-      token,
-    },
-  };
+    return {
+      props: {
+        posts,
+        token,
+      },
+    };
+  } catch (error) {
+    return handleServerError(error);
+  }
 };

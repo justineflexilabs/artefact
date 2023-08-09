@@ -22,7 +22,7 @@ export const PostService = {
   },
   getById: async function (postId: number): Promise<GetPostByIdResponse> {
     try {
-      const { data } = await axiosInstance.get(`${pathUrl}/${postId}`);
+      const data = await axiosInstance.get(`${pathUrl}/${postId}`);
       return data;
     } catch (error) {
       console.error(error);

@@ -1,15 +1,14 @@
 import { Container, Flex, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { Inter } from 'next/font/google';
 
 import UserService, { UserData } from '@/services/UserService';
+import { handleServerError } from '@/utils/helpers/serverErrorHandler';
 import styles from '@/pages/Home.module.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 interface Props {
   users: UserData[];
+  errorMessage: string;
 }
 
 export default function Users({ users }: Props) {
@@ -21,7 +20,7 @@ export default function Users({ users }: Props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={`${styles.main}`}>
         <Text fontWeight={'bold'}>Users</Text>
         {users.map((user: UserData) => (
           <Container key={user.userId}>
@@ -40,11 +39,15 @@ export default function Users({ users }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const users = await UserService.getAll();
+  try {
+    const users = await UserService.getAll();
 
-  return {
-    props: {
-      users,
-    },
-  };
+    return {
+      props: {
+        users,
+      },
+    };
+  } catch (error) {
+    return handleServerError(error);
+  }
 };
