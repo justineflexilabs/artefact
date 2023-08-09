@@ -12,8 +12,8 @@ const settings = {
   fade: true,
   infinite: true,
   autoplay: true,
-  autoplaySpeed: 4000,
-  speed: 500,
+  autoplaySpeed: 3000,
+  speed: 700,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -44,7 +44,7 @@ export default function AuthImageCarousel() {
   ];
 
   return (
-    <Box width={'100%'} position={'relative'}>
+    <>
       <Image
         src={Logo}
         alt="Logo"
@@ -62,11 +62,10 @@ export default function AuthImageCarousel() {
           <Box
             key={index}
             height={'100vh'}
-            position="relative"
             backgroundRepeat="no-repeat"
+            backgroundPosition={'center'}
             backgroundSize="cover"
             backgroundImage={`url(${card.image.src})`}
-            overflow={'hidden'}
           >
             <Box
               position="absolute"
@@ -82,7 +81,7 @@ export default function AuthImageCarousel() {
               direction={'column'}
               position="absolute"
               left="20"
-              bottom="0"
+              bottom="5"
               width={'full'}
               zIndex={2}
               fontFamily={'Gilroy-Light'}
@@ -114,6 +113,6 @@ export default function AuthImageCarousel() {
           </Box>
         ))}
       </Slider>
-    </Box>
+    </>
   );
 }

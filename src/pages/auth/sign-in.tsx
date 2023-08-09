@@ -13,6 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -42,10 +43,10 @@ export default function SignIn() {
 
   return (
     <Flex
+      width={'full'}
       minHeight={'100vh'}
       alignItems="center"
       justifyContent="center"
-      width="100vw"
     >
       <Box width="45%" height="100vh">
         <AuthImageCarousel />
@@ -55,7 +56,7 @@ export default function SignIn() {
         height="100vh"
         alignItems="center"
         justifyContent="center"
-        width={'full'}
+        width={'55%'}
       >
         <Box as="form" onSubmit={handleSubmit} width={'50%'}>
           <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
@@ -100,7 +101,6 @@ export default function SignIn() {
             </InputGroup>
           </FormControl>
           <Button
-            fontFamily={'Gilroy-Light'}
             variant={'primary'}
             type="submit"
             width="100%"
@@ -109,11 +109,13 @@ export default function SignIn() {
             size={'lg'}
             mb={4}
           >
-            <Text fontSize={'2xl'}>Login</Text>
+            <Text fontSize={'2xl'} fontFamily={'Gilroy-Light.'}>
+              Login
+            </Text>
           </Button>
           <Flex justifyContent={'space-between'}>
             <Checkbox>Remember me</Checkbox>
-            <Text>Forgot Password?</Text>
+            <Link href="/auth/reset-password">Forgot Password?</Link>
           </Flex>
         </Box>
       </Flex>

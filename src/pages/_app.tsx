@@ -17,7 +17,11 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const router = useRouter();
-  const showSidebar = router.pathname === '/auth/sign-in' ? false : true;
+  const showSidebar =
+    !router.pathname.includes('auth') &&
+    router.pathname !== '/404' &&
+    router.pathname !== '/500';
+
   return (
     <>
       <SessionProvider session={session} refetchOnWindowFocus={false}>
@@ -26,9 +30,7 @@ export default function App({
             {showSidebar && <Sidebar />}
 
             <Box width="full">
-              <ScaleFade key={router.route} initialScale={0.9} in={true}>
-                <Component {...pageProps} />
-              </ScaleFade>
+              <Component {...pageProps} />
             </Box>
           </Flex>
         </ChakraProvider>
