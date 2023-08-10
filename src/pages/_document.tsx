@@ -10,6 +10,7 @@ export default function Document() {
           charSet="UTF-8"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
         />
+
       </Head>
       <body>
         <Main />

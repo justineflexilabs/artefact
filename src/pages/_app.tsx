@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 
-import { Box, ChakraProvider, Flex, ScaleFade } from '@chakra-ui/react';
+import { Box, ChakraProvider, Flex, SlideFade } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import dynamic from 'next/dynamic';
@@ -17,11 +17,9 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   const router = useRouter();
+  const isAuthRoute = router.pathname.includes('auth');
   const showSidebar =
-    !router.pathname.includes('auth') &&
-    router.pathname !== '/404' &&
-    router.pathname !== '/500';
-
+    !isAuthRoute && router.pathname !== '/404' && router.pathname !== '/500';
   return (
     <>
       <SessionProvider session={session} refetchOnWindowFocus={false}>
@@ -30,7 +28,13 @@ export default function App({
             {showSidebar && <Sidebar />}
 
             <Box width="full">
-              <Component {...pageProps} />
+              {!isAuthRoute ? (
+                <SlideFade key={router.route} in={true}>
+                  <Component {...pageProps} />
+                </SlideFade>
+              ) : (
+                <Component {...pageProps} />
+              )}
             </Box>
           </Flex>
         </ChakraProvider>
