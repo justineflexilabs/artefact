@@ -1,9 +1,11 @@
 import { FormEventHandler, useState } from 'react';
 
 import {
+  AbsoluteCenter,
   Box,
   Button,
   Checkbox,
+  Divider,
   Flex,
   FormControl,
   FormLabel,
@@ -17,8 +19,8 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { PasswordIcon, UserIcon } from '@public/icons/auth';
-import { AuthImageCarousel } from '@/components/Auth';
+import { AuthFooterLogo, AuthImageCarousel } from '@/components/Auth';
+import { EmailIcon, PasswordIcon, UserIcon } from '@public/icons/auth';
 
 export default function SignIn() {
   const router = useRouter();
@@ -58,14 +60,12 @@ export default function SignIn() {
         justifyContent="center"
         width={'55%'}
       >
-        <Box as="form" onSubmit={handleSubmit} width={'50%'}>
+        <Box as="form" onSubmit={handleSubmit} width={'45%'}>
           <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
             Login Member Area
           </Text>
           <FormControl isRequired mb={3}>
-            <FormLabel fontFamily={'Gilroy-Light'} fontSize={16}>
-              Email Address
-            </FormLabel>
+            <FormLabel>Email Address</FormLabel>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <Image src={UserIcon} alt="Email Icon" />
@@ -100,6 +100,12 @@ export default function SignIn() {
               />
             </InputGroup>
           </FormControl>
+          <Flex justifyContent={'space-between'} mb={5}>
+            <Checkbox fontFamily={'Gilroy-Light'}>Remember me</Checkbox>
+            <Link href="/auth/reset-password">
+              <Text textStyle={'forgotPassword'}>Forgot Password?</Text>
+            </Link>
+          </Flex>
           <Button
             variant={'primary'}
             type="submit"
@@ -107,18 +113,32 @@ export default function SignIn() {
             isLoading={isLoading}
             loadingText="Logging in..."
             size={'lg'}
-            mb={4}
           >
-            <Text fontSize={'2xl'} fontFamily={'Gilroy-Light.'}>
-              Login
-            </Text>
+            <Text textStyle={'buttonText'}>Login</Text>
           </Button>
-          <Flex justifyContent={'space-between'}>
-            <Checkbox>Remember me</Checkbox>
-            <Link href="/auth/reset-password">Forgot Password?</Link>
-          </Flex>
+
+          <Box position="relative" pt="10" pb="10">
+            <Divider colorScheme="black" borderColor={'black'} />
+            <AbsoluteCenter
+              bg="white"
+              px="5"
+              fontFamily={'Gilroy-Light'}
+              fontSize={{ base: 'xs', md: 'xs', lg: 'sm' }}
+            >
+              Don&apos;t have an account?
+            </AbsoluteCenter>
+          </Box>
+          <Button
+            leftIcon={<Image src={EmailIcon} alt="email-icon" />}
+            colorScheme="blackAlpha"
+            variant="outline"
+            width={'full'}
+          >
+            <Text fontFamily={'Gilroy-Medium'}>Contact Element</Text>
+          </Button>
         </Box>
       </Flex>
+      <AuthFooterLogo />
     </Flex>
   );
 }

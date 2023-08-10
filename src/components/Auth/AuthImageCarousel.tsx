@@ -7,13 +7,13 @@ import Slider from 'react-slick';
 import { Image1, Image2, Image3, Logo } from '@public/images/auth';
 
 const settings = {
-  dots: true,
+  dots: false,
   arrows: false,
   fade: true,
   infinite: true,
   autoplay: true,
-  autoplaySpeed: 3000,
-  speed: 700,
+  autoplaySpeed: 4000,
+  speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
 };

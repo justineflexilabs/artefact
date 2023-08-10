@@ -15,7 +15,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { ArrowIcon, UserIcon } from '@public/icons/auth';
-import { AuthImageCarousel } from '@/components/Auth';
+import { AuthFooterLogo, AuthImageCarousel } from '@/components/Auth';
 
 export default function ResetPassword() {
   const [emailAddress, setEmailAddress] = useState<string>('');
@@ -66,9 +66,7 @@ export default function ResetPassword() {
             size={'lg'}
             mb={4}
           >
-            <Text fontSize={'2xl'} fontFamily={'Gilroy-Light.'}>
-              Reset Password
-            </Text>
+            <Text textStyle={'buttonText'}>Reset Password</Text>
           </Button>
           <Flex justifyContent={'flex-end'}>
             <Link href="/auth/sign-in" style={{ display: 'flex' }}>
@@ -78,6 +76,7 @@ export default function ResetPassword() {
           </Flex>
         </Box>
       </Flex>
+      <AuthFooterLogo />
     </Flex>
   );
 }
