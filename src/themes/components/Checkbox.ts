@@ -1,4 +1,3 @@
-// components/Button.ts
 import { ComponentStyleConfig } from '@chakra-ui/react';
 
 const baseStyle = {
@@ -22,7 +21,6 @@ const baseStyle = {
         backgroundSize: '50% 50%',
         backgroundPosition: '50% 50%',
         backgroundRepeat: 'no-repeat',
-        border: '1px solid',
       },
     },
     _hover: {
