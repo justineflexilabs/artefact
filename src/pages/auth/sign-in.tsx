@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import {
   AbsoluteCenter,
@@ -27,7 +27,7 @@ export default function SignIn() {
   const [userInfo, setUserInfo] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     const res = await signIn('credentials', {

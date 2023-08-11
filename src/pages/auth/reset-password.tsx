@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import {
   Box,
@@ -13,12 +13,23 @@ import {
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDisclosure } from '@chakra-ui/hooks';
 
-import { ArrowIcon, UserIcon } from '@public/icons/auth';
+import { ArrowIcon, ModalIcon, UserIcon } from '@public/icons/auth';
 import { AuthFooterLogo, AuthImageCarousel } from '@/components/Auth';
+import { ReusableModal } from '@/components/Shared';
 
 export default function ResetPassword() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [emailAddress, setEmailAddress] = useState<string>('');
+
+  const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onOpen();
+    console.log(emailAddress);
+  };
+
   return (
     <Flex
       width={'full'}
@@ -36,7 +47,7 @@ export default function ResetPassword() {
         justifyContent="center"
         width={'55%'}
       >
-        <Box as="form" width={'50%'}>
+        <Box as="form" width={'50%'} onSubmit={handleSubmitForm}>
           <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
             Recover Password
           </Text>
@@ -77,6 +88,21 @@ export default function ResetPassword() {
         </Box>
       </Flex>
       <AuthFooterLogo />
+
+      <ReusableModal
+        isOpen={isOpen}
+        onClose={onClose}
+        footerActions={
+          <>
+            <Button variant={'primary'} mr={3} mb={3} onClick={onClose}>
+              Close
+            </Button>
+          </>
+        }
+      >
+        <Image src={ModalIcon} alt="Email Icon" width={100} height={100} />
+        <Text mt={5}>Please check your email to reset your password</Text>
+      </ReusableModal>
     </Flex>
   );
 }

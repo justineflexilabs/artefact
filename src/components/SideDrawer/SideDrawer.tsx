@@ -6,7 +6,7 @@ interface Props {
   selectedPost: PostData[];
 }
 
-export default function SideDrawer({ selectedPost }: Props) {
+const SideDrawer: React.FC<Props> = ({ selectedPost }: Props) => {
   return (
     <div>
       <Head>
@@ -17,4 +17,6 @@ export default function SideDrawer({ selectedPost }: Props) {
       </Head>
     </div>
   );
-}
+};
+
+export default SideDrawer;

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Sidebar desc',
 };
 
-export default function Sidebar() {
+const Sidebar: React.FC = () => {
   const handleLogout = async () => {
     await signOut({
       callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/auth/sign-in`,
@@ -36,4 +36,6 @@ export default function Sidebar() {
       </Button>
     </VStack>
   );
-}
+};
+
+export default Sidebar;

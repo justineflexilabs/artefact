@@ -18,7 +18,7 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function AuthImageCarousel() {
+const AuthImageCarousel: React.FC = () => {
   const cards = [
     {
       title: 'Turn your spaces into places.',
@@ -115,4 +115,6 @@ export default function AuthImageCarousel() {
       </Slider>
     </>
   );
-}
+};
+
+export default AuthImageCarousel;
