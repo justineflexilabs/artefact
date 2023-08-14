@@ -31,6 +31,11 @@ const theme = extendTheme({
       fontSize: ['md', 'lg', 'xl', '2xl'],
       fontFamily: 'Gilroy-Light',
     },
+    sidebarLink: {
+      fontFamily: 'Gilroy-Bold',
+      fontSize: '14px',
+      color: '#ffffff',
+    },
   },
 });
 export default theme;

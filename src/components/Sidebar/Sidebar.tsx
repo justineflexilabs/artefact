@@ -1,9 +1,9 @@
-import { Button, LinkBox, VStack } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Box } from '@chakra-ui/react';
 import { Metadata } from 'next';
-import { signOut } from 'next-auth/react';
 
-import { removeToken } from '@/lib/http';
+import AvatarBox from './AvatarBox';
+import Logo from './Logo';
+import Navigation from './Navigation';
 
 export const metadata: Metadata = {
   title: 'Sidebar',
@@ -11,30 +11,14 @@ export const metadata: Metadata = {
 };
 
 const Sidebar: React.FC = () => {
-  const handleLogout = async () => {
-    await signOut({
-      callbackUrl: `${process.env.NEXT_PUBLIC_DOMAIN}/auth/sign-in`,
-      redirect: true,
-    });
-
-    removeToken();
-  };
-
   return (
-    <VStack as="nav" spacing={4} align="start" style={{ padding: '1rem' }}>
-      <LinkBox>
-        <Link href={'/'}>Posts</Link>
-      </LinkBox>
-      <LinkBox>
-        <Link href={'/users'}>Users</Link>
-      </LinkBox>
-      <LinkBox>
-        <Link href={'/add-installation'}>Add Installation</Link>
-      </LinkBox>
-      <Button variant={'primary'} onClick={handleLogout}>
-        Log out
-      </Button>
-    </VStack>
+    <>
+      <Box width="full">
+        <Logo />
+        <Navigation />
+        <AvatarBox />
+      </Box>
+    </>
   );
 };
 

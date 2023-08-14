@@ -1,0 +1,9 @@
+export { default as AddInstallationIcon } from './AddInstallationIcon';
+export { default as ConditionIcon } from './ConditionIcon';
+export { default as ContactIcon } from './ContactIcon';
+export { default as DashboardIcon } from './DashboardIcon';
+export { default as RequestAuditIcon } from './RequestAuditIcon';
+export { default as RequestValuationIcon } from './RequestValuationIcon';
+export { default as LogoutIcon } from './LogoutIcon';
+export { default as SettingsIcon } from './SettingsIcon';
+export { default as ValuationIcon } from './ValuationIcon';
