@@ -16,8 +16,8 @@ import Link from 'next/link';
 import { useDisclosure } from '@chakra-ui/hooks';
 
 import { ArrowIcon, ModalIcon, UserIcon } from '@public/icons/auth';
-import { AuthFooterLogo, AuthImageCarousel } from '@/components/Auth';
-import { ReusableModal } from '@/components/Shared';
+import { AuthFooterLogo, AuthImageCarousel } from '@/components/auth';
+import { ReusableModal } from '@/components/shared';
 
 export default function ResetPassword() {
   const { isOpen, onOpen, onClose } = useDisclosure();

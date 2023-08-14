@@ -19,7 +19,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-import { AuthFooterLogo, AuthImageCarousel } from '@/components/Auth';
+import { AuthFooterLogo, AuthImageCarousel } from '@/components/auth';
 import { EmailIcon, PasswordIcon, UserIcon } from '@public/icons/auth';
 
 export default function SignIn() {

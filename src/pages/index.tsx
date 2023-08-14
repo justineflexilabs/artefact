@@ -15,7 +15,7 @@ import styles from '@/pages/Home.module.css';
 const inter = Inter({ subsets: ['latin'] });
 
 const SideDrawer = dynamic(() =>
-  import('@/components/SideDrawer').then((res) => res.SideDrawer)
+  import('@/components/sidedrawer').then((res) => res.SideDrawer)
 );
 
 interface Props {
