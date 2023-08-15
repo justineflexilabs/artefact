@@ -1,7 +1,8 @@
 import '@/styles/globals.css';
 
-import { Box, ChakraProvider, Flex, HStack, SlideFade } from '@chakra-ui/react';
+import { ChakraProvider, Flex, HStack, SlideFade } from '@chakra-ui/react';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -29,38 +30,43 @@ export default function App({
     !isAuthRoute && router.pathname !== '/404' && router.pathname !== '/500';
   return (
     <>
+      <Head>
+        <title>Artefact</title>
+        <meta property="og:title" content="Artefact" key="title" />
+      </Head>
       <SessionProvider session={session} refetchOnWindowFocus={false}>
         <ChakraProvider theme={theme}>
-          <HStack width="full" h="100vh" padding={0}>
+          <HStack width="full" height="100vh" padding={0} margin={0} gap={0}>
             {showSidebar && (
               <>
                 <Flex
                   as="aside"
                   width="full"
                   height="full"
-                  maxW={isCollapsed ? 320 : 100}
-                  bg="brand.500"
+                  maxWidth={isCollapsed ? 320 : 100}
+                  bg="primary.500"
                   alignItems="start"
                   padding={6}
+                  paddingTop={3}
                   flexDirection="column"
                   justifyContent="space-between"
                   transition="ease-in-out .2s"
                 >
                   <Sidebar />
                 </Flex>
-                <Header />
               </>
             )}
 
-            <Box width="full">
+            <Flex width="full" height={'100vh'} flexDirection="column">
               {!isAuthRoute ? (
                 <SlideFade key={router.route} in={true}>
+                  <Header />
                   <Component {...pageProps} />
                 </SlideFade>
               ) : (
                 <Component {...pageProps} />
               )}
-            </Box>
+            </Flex>
           </HStack>
         </ChakraProvider>
       </SessionProvider>

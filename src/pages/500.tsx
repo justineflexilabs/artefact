@@ -14,10 +14,14 @@ export default function ServerErrorPage() {
           alignItems={'center'}
           justifyContent={'center'}
           flexDirection={'column'}
-          p={10}
+          padding={10}
         >
           <Text>Sorry, something went wrong.</Text>
-          <Button onClick={() => router.back()} variant={'primary'} mt={5}>
+          <Button
+            onClick={() => router.back()}
+            variant={'primary'}
+            marginTop={5}
+          >
             Go Back
           </Button>
         </CardBody>

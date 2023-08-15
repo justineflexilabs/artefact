@@ -86,7 +86,7 @@ const AuthImageCarousel: React.FC = () => {
               zIndex={2}
               fontFamily={'Gilroy-Light'}
             >
-              <Box mb={20}>
+              <Box marginBottom={20}>
                 <Text
                   fontSize={{ base: '2xl', lg: '4xl' }}
                   color="white"
