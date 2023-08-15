@@ -9,8 +9,6 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import useSidebarStore from '@/stores/useSidebarStore';
-
 interface Props {
   item: {
     label: string;
@@ -19,26 +17,21 @@ interface Props {
   };
   isActive: boolean;
   isCollapsed: boolean;
-  index: number;
 }
 
 const NavigationItem: React.FC<Props> = ({
   item,
   isActive,
   isCollapsed,
-  index,
 }: Props) => {
-  const setActiveIndex = useSidebarStore((state) => state.setActiveIndex);
-
   const { label, path } = item;
   const { icon } = item;
   return (
     <Box
       display="flex"
       alignItems="center"
-      my={isCollapsed ? 3 : 8}
+      my={isCollapsed ? 2 : 8}
       justifyContent="center"
-      onClick={() => setActiveIndex(index)}
       textStyle={'sidebarLink'}
     >
       <LinkChakra
@@ -58,14 +51,14 @@ const NavigationItem: React.FC<Props> = ({
             width={'85%'}
             padding={3}
             paddingLeft={5}
-            bg={isActive ? 'secondary.500' : '#282828'}
+            bg={isActive ? 'secondary.500' : 'primary.600'}
             borderRadius={'md'}
           >
             <ListIcon as={icon} />
-            <Text ml={5}>{label}</Text>
+            <Text marginLeft={5}>{label}</Text>
           </Flex>
         ) : (
-          <ListIcon ml={5} as={icon} fontSize={22} />
+          <ListIcon marginLeft={5} as={icon} fontSize={22} />
         )}
       </LinkChakra>
     </Box>

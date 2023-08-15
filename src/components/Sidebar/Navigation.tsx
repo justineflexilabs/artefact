@@ -1,4 +1,5 @@
 import { List, ListItem } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 import {
   AddInstallationIcon,
@@ -53,17 +54,16 @@ const items = [
 
 const Navigation: React.FC = () => {
   const isCollapsed = useSidebarStore((state) => state.isCollapsed);
-  const activeIndex = useSidebarStore((state) => state.activeIndex);
+  const route = useRouter();
 
   return (
-    <List width="full" mb={isCollapsed ? 20 : 0}>
+    <List width="full" marginBottom={isCollapsed ? 10 : 0}>
       {items.map((item, index) => (
         <ListItem key={index}>
           <NavigationItem
             item={item}
-            isActive={index === activeIndex}
+            isActive={route.pathname === item.path}
             isCollapsed={isCollapsed}
-            index={index}
           />
         </ListItem>
       ))}

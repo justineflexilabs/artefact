@@ -23,8 +23,9 @@ const AvatarBox: React.FC = () => {
         borderColor="gray.100"
         borderRadius="full"
         width="full"
-        p={5}
-        pt={0}
+        padding={5}
+        paddingTop={0}
+        marginTop={isCollapsed ? 20 : 0}
         alignItems="center"
         justifyContent="center"
         flexDirection={isCollapsed ? 'row' : 'column-reverse'}
@@ -34,8 +35,8 @@ const AvatarBox: React.FC = () => {
             <Avatar
               name="Design To Chakra UI"
               bg="teal.300"
-              size={'md'}
-              mr={2}
+              size={'sm'}
+              marginRight={2}
             />
             <Flex
               width="full"
@@ -43,6 +44,7 @@ const AvatarBox: React.FC = () => {
               gap={4}
               justifyContent="center"
               alignItems="flex-start"
+              marginLeft={2}
             >
               <Text
                 fontSize={14}
@@ -50,15 +52,15 @@ const AvatarBox: React.FC = () => {
                 color="white"
                 lineHeight={0}
               >
-                Kaz Uy
+                Kaz Miller
               </Text>
               <Text
                 as="small"
                 color="white"
                 fontFamily="Gilroy-Light"
-                fontSize={10}
+                fontSize={9}
                 lineHeight={0}
-                mt={2}
+                marginTop={1}
               >
                 City of Balbarat
               </Text>
@@ -69,7 +71,7 @@ const AvatarBox: React.FC = () => {
           </>
         ) : (
           <>
-            <LinkChakra href="/user-profile" mt={5}>
+            <LinkChakra href="/user-profile" marginTop={5}>
               <SettingsIcon />
             </LinkChakra>
             <Avatar name="Design To Chakra UI" bg="teal.300" size={'md'} />
@@ -101,11 +103,11 @@ const AvatarBox: React.FC = () => {
               bg={'#282828'}
               borderRadius={'md'}
             >
-              <LogoutIcon fontSize={30} ml={2} />
-              <Text ml={5}>Logout</Text>
+              <LogoutIcon fontSize={30} marginLeft={2} />
+              <Text marginLeft={5}>Logout</Text>
             </Flex>
           ) : (
-            <LogoutIcon fontSize={22} mt={5} />
+            <LogoutIcon fontSize={22} marginTop={5} />
           )}
         </LinkChakra>
       </Box>

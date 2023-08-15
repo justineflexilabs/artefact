@@ -1,17 +1,20 @@
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { create } from 'zustand';
 
 interface SidebarViewState {
   isCollapsed: boolean;
-  activeIndex: number;
   setIsCollapsed: () => void;
-  setActiveIndex: (value: number) => void;
 }
 
-const useSidebarStore = create<SidebarViewState>()((set) => ({
-  isCollapsed: true,
-  activeIndex: 0,
-  setIsCollapsed: () => set((state) => ({ isCollapsed: !state.isCollapsed })),
-  setActiveIndex: (value: number) => set(() => ({ activeIndex: value })),
-}));
+const useSidebarStore = create<SidebarViewState>()(
+  persist(
+    (set) => ({
+      isCollapsed: true,
+      setIsCollapsed: () =>
+        set((state) => ({ isCollapsed: !state.isCollapsed })),
+    }),
+    { name: 'sidebar', storage: createJSONStorage(() => localStorage) }
+  )
+);
 
 export default useSidebarStore;

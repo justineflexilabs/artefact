@@ -13,18 +13,12 @@ const Logo: React.FC = () => {
         alignItems="center"
         justifyContent="center"
         flexDirection={isCollapsed ? 'row' : 'column'}
-        gap={4}
       >
-        <Box
-          display="flex"
-          alignItems="center"
-          gap={2}
-          justifyContent={'center'}
-        >
+        <Box display="flex" alignItems="center" justifyContent={'center'}>
           {isCollapsed ? <Image src={LogoImage} alt="Artefact Logo" /> : null}
         </Box>
       </Flex>
-      <Divider mt={5} />
+      <Divider marginTop={3} marginBottom={3} borderColor={'whiteAlpha.400'} />
     </>
   );
 };
