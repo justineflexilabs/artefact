@@ -27,7 +27,11 @@ export default function ResetPassword() {
   const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onOpen();
-    console.log(emailAddress);
+  };
+
+  const handleClose = () => {
+    onClose();
+    setEmailAddress('');
   };
 
   return (
@@ -48,10 +52,10 @@ export default function ResetPassword() {
         width={'55%'}
       >
         <Box as="form" width={'50%'} onSubmit={handleSubmitForm}>
-          <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
+          <Text fontSize={'3xl'} marginBottom={5} fontFamily={'Gilroy-Regular'}>
             Recover Password
           </Text>
-          <FormControl isRequired mb={3}>
+          <FormControl isRequired marginBottom={3}>
             <FormLabel fontFamily={'Gilroy-Light'} fontSize={16}>
               Email Address
             </FormLabel>
@@ -60,11 +64,12 @@ export default function ResetPassword() {
                 <Image src={UserIcon} alt="Email Icon" />
               </InputLeftElement>
               <Input
+                value={emailAddress}
                 type="email"
                 placeholder="Enter your email..."
                 onChange={({ target }) => setEmailAddress(target.value)}
                 isRequired
-                mb={4}
+                marginBottom={4}
               />
             </InputGroup>
           </FormControl>
@@ -75,14 +80,14 @@ export default function ResetPassword() {
             width="100%"
             loadingText="Submitting..."
             size={'lg'}
-            mb={4}
+            marginBottom={4}
           >
             <Text textStyle={'buttonText'}>Reset Password</Text>
           </Button>
           <Flex justifyContent={'flex-end'}>
             <Link href="/auth/sign-in" style={{ display: 'flex' }}>
               <Image src={ArrowIcon} alt="arrow icon" />{' '}
-              <Text ml={2}>Go back to login page</Text>
+              <Text marginLeft={2}>Go back to login page</Text>
             </Link>
           </Flex>
         </Box>
@@ -91,17 +96,24 @@ export default function ResetPassword() {
 
       <ReusableModal
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={handleClose}
         footerActions={
           <>
-            <Button variant={'primary'} mr={3} mb={3} onClick={onClose}>
+            <Button
+              variant={'primary'}
+              marginRight={3}
+              marginBottom={3}
+              onClick={handleClose}
+            >
               Close
             </Button>
           </>
         }
       >
         <Image src={ModalIcon} alt="Email Icon" width={100} height={100} />
-        <Text mt={5}>Please check your email to reset your password</Text>
+        <Text marginTop={5}>
+          Please check your email to reset your password
+        </Text>
       </ReusableModal>
     </Flex>
   );

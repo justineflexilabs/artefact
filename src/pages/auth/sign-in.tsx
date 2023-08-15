@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 import {
   AbsoluteCenter,
@@ -8,36 +8,61 @@ import {
   Divider,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
+  useToast,
 } from '@chakra-ui/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { AuthFooterLogo, AuthImageCarousel } from '@/components/auth';
 import { EmailIcon, PasswordIcon, UserIcon } from '@public/icons/auth';
 
 export default function SignIn() {
+  const toast = useToast();
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState({ email: '', password: '' });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const SignInSchema = z.object({
+    email: z.string().email(),
+    password: z
+      .string()
+      .min(3, { message: 'Must be 3 or more characters long' })
+      .max(20, { message: 'Must be 20 or less characters long' }),
+  });
+
+  type SignInSchemaType = z.infer<typeof SignInSchema>;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignInSchemaType>({ resolver: zodResolver(SignInSchema) });
+
+  const onSubmit: SubmitHandler<SignInSchemaType> = async (data) => {
     setIsLoading(true);
     const res = await signIn('credentials', {
-      email: userInfo.email,
-      password: userInfo.password,
+      email: data.email,
+      password: data.password,
       redirect: false,
     });
 
     if (!res || !res.ok) {
       setIsLoading(false);
+      toast({
+        position: 'top',
+        title: res?.error,
+        status: 'error',
+      });
+
       return;
     }
     router.replace('/');
@@ -60,11 +85,15 @@ export default function SignIn() {
         justifyContent="center"
         width={'55%'}
       >
-        <Box as="form" onSubmit={handleSubmit} width={'45%'}>
-          <Text fontSize={'3xl'} mb={5} fontFamily={'Gilroy-Regular'}>
+        <Box as="form" onSubmit={handleSubmit(onSubmit)} width={'45%'}>
+          <Text fontSize={'3xl'} marginBottom={5} fontFamily={'Gilroy-Regular'}>
             Login Member Area
           </Text>
-          <FormControl isRequired mb={3}>
+          <FormControl
+            isRequired
+            isInvalid={Boolean(errors.email)}
+            marginBottom={5}
+          >
             <FormLabel>Email Address</FormLabel>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
@@ -73,15 +102,18 @@ export default function SignIn() {
               <Input
                 type="email"
                 placeholder="Enter your email..."
-                onChange={({ target }) =>
-                  setUserInfo({ ...userInfo, email: target.value })
-                }
-                isRequired
-                mb={4}
+                {...register('email')}
               />
             </InputGroup>
+            {errors.email && (
+              <FormErrorMessage>{errors.email.message}</FormErrorMessage>
+            )}
           </FormControl>
-          <FormControl isRequired mb={3}>
+          <FormControl
+            isRequired
+            isInvalid={Boolean(errors.password)}
+            marginBottom={5}
+          >
             <FormLabel fontFamily={'Gilroy-Light'} fontSize={16}>
               Password
             </FormLabel>
@@ -92,15 +124,14 @@ export default function SignIn() {
               <Input
                 type="password"
                 placeholder="******"
-                onChange={({ target }) =>
-                  setUserInfo({ ...userInfo, password: target.value })
-                }
-                isRequired
-                mb={4}
+                {...register('password')}
               />
             </InputGroup>
+            {errors.password && (
+              <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+            )}
           </FormControl>
-          <Flex justifyContent={'space-between'} mb={5}>
+          <Flex justifyContent={'space-between'} marginBottom={5}>
             <Checkbox fontFamily={'Gilroy-Light'}>Remember me</Checkbox>
             <Link href="/auth/reset-password">
               <Text textStyle={'forgotPassword'}>Forgot Password?</Text>
@@ -116,14 +147,21 @@ export default function SignIn() {
           >
             <Text textStyle={'buttonText'}>Login</Text>
           </Button>
-
-          <Box position="relative" pt="10" pb="10">
-            <Divider colorScheme="black" borderColor={'black'} />
+          <Box
+            position="relative"
+            py="10"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Divider borderColor={'black'} />
             <AbsoluteCenter
               bg="white"
-              px="5"
               fontFamily={'Gilroy-Light'}
-              fontSize={{ base: 'xs', md: 'xs', lg: 'sm' }}
+              fontSize={{ base: 'xs', md: 'xs', lg: 'md' }}
+              alignContent={'center'}
+              px={5}
+              width={'235px'}
             >
               Don&apos;t have an account?
             </AbsoluteCenter>
